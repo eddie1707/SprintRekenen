@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E8140F411A01133D005F4216 /* win.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E8140F401A01133D005F4216 /* win.mp3 */; };
+		E8140F431A011346005F4216 /* FOUT.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E8140F421A011346005F4216 /* FOUT.mp3 */; };
 		E8E67C3E19FFD99800D2B73C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E67C3D19FFD99800D2B73C /* AppDelegate.swift */; };
 		E8E67C4019FFD99800D2B73C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E67C3F19FFD99800D2B73C /* ViewController.swift */; };
 		E8E67C4319FFD99800D2B73C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E8E67C4119FFD99800D2B73C /* Main.storyboard */; };
@@ -26,6 +28,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E8140F401A01133D005F4216 /* win.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = win.mp3; sourceTree = "<group>"; };
+		E8140F421A011346005F4216 /* FOUT.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = FOUT.mp3; sourceTree = "<group>"; };
 		E8E67C3819FFD99800D2B73C /* SprintRekenen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SprintRekenen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8E67C3C19FFD99800D2B73C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E8E67C3D19FFD99800D2B73C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -90,6 +94,8 @@
 		E8E67C3B19FFD99800D2B73C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				E8140F421A011346005F4216 /* FOUT.mp3 */,
+				E8140F401A01133D005F4216 /* win.mp3 */,
 				E8E67C3C19FFD99800D2B73C /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -194,7 +200,9 @@
 			files = (
 				E8E67C4319FFD99800D2B73C /* Main.storyboard in Resources */,
 				E8E67C4819FFD99800D2B73C /* LaunchScreen.xib in Resources */,
+				E8140F431A011346005F4216 /* FOUT.mp3 in Resources */,
 				E8E67C4519FFD99800D2B73C /* Images.xcassets in Resources */,
+				E8140F411A01133D005F4216 /* win.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -407,6 +415,7 @@
 				E8E67C5919FFD99800D2B73C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E8E67C5A19FFD99800D2B73C /* Build configuration list for PBXNativeTarget "SprintRekenenTests" */ = {
 			isa = XCConfigurationList;
@@ -415,6 +424,7 @@
 				E8E67C5C19FFD99800D2B73C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
