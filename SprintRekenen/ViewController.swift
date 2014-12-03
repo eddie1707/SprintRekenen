@@ -160,9 +160,11 @@ class ViewController: UIViewController {
     
     var percent = 0
     
-    let numberArray = [1, 2, 2, 3, 3, 4, 4, 4, 5, 5, 6, 6, 6, 6, 7, 7, 8, 8, 8, 8, 9, 9, 9, 10, 10, 10, 10, 12, 12, 12, 12, 14, 14, 15, 15, 16, 16, 16, 18, 18, 18, 18, 20, 20, 20, 20, 21, 21, 24, 24, 24, 24, 25, 27, 27, 28, 28, 30, 30, 30, 30, 32, 32, 35, 35, 36, 36, 36, 40, 40, 40, 40, 42, 42, 45, 45, 48, 48, 49, 50, 50, 54, 54, 56, 56, 60, 60, 63, 63, 64, 70, 70, 72, 72, 80, 80, 81, 90, 90, 100]
+    var numberArray = [1, 2, 2, 3, 3, 4, 4, 4, 5, 5, 6, 6, 6, 6, 7, 7, 8, 8, 8, 8, 9, 9, 9, 10, 10, 10, 10, 12, 12, 12, 12, 14, 14, 15, 15, 16, 16, 16, 18, 18, 18, 18, 20, 20, 20, 20, 21, 21, 24, 24, 24, 24, 25, 27, 27, 28, 28, 30, 30, 30, 30, 32, 32, 35, 35, 36, 36, 36, 40, 40, 40, 40, 42, 42, 45, 45, 48, 48, 49, 50, 50, 54, 54, 56, 56, 60, 60, 63, 63, 64, 70, 70, 72, 72, 80, 80, 81, 90, 90, 100]
     
-    var randomIndex = 20
+    // Index 41, nummer 18 ??
+    // Index 71, nummer 40 ??
+    
     
     var audioPlayer: AVAudioPlayer?
     
@@ -172,10 +174,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-//        let numberArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 14, 15, 16, 18, 20, 21, 24, 25, 27, 28, 30, 32, 35, 36, 40, 42, 45, 48, 49, 54, 56, 60, 63, 63, 70, 72, 80, 81, 90, 100]
-//        var randomIndex = Int(arc4random_uniform(UInt32(numberArray.count)))
-        
-        println("\(numberArray.count)")
+        println("numbers in numberArray: \(numberArray.count)")
         
         self.tijdLabel.text = String(counter)
         
@@ -186,7 +185,6 @@ class ViewController: UIViewController {
         self.goedLabel.text = "Goed: \(prntGoed)"
         self.foutLabel.text = "Fout: \(prntFout)"
         self.percentGLabel.text = "0%"
-        self.randomNumberLabel.text = String(randomIndex)
         
         disableButtons()
         clearButtonText()
@@ -210,6 +208,10 @@ class ViewController: UIViewController {
             startButton.setTitle("Reset", forState: .Normal)
             startButton.backgroundColor = UIColor.redColor()
             timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("updateCounter"), userInfo: nil, repeats: true)
+            
+            var randomIndex = Int(arc4random_uniform(UInt32(numberArray.count)))
+            self.randomNumberLabel.text = String(numberArray[randomIndex])
+            
             randomNumberFunc()
             enableButtons()
         }
@@ -218,636 +220,2332 @@ class ViewController: UIViewController {
     //All buttons in gridView in horizontal rows
     //Row 1
     @IBAction func oneButtonPressed(sender: UIButton) {
-        if randomIndex != 1 {
+        if randomNumberLabel.text != "1" {
             foutFunc()
             
             oneButton.setTitle("", forState: .Normal)
             
             calculatePercentage()
-        } else if randomIndex == 1 {
+        } else if randomNumberLabel.text == "1" {
             goedFunc()
             
             oneButton.setTitle("1", forState: .Normal)
             oneButton.enabled = false
+            if let i = find(numberArray,1) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
         }
         updateMainView()
         calculatePercentage()
+        checkDone()
     }
     
     @IBAction func twoButtonPressed(sender: UIButton) {
-        if randomIndex != 2 {
+        if randomNumberLabel.text != "2" {
             foutFunc()
             
             twoButton.setTitle("", forState: .Normal)
             
             calculatePercentage()
-        } else if randomIndex == 2 {
+        } else if randomNumberLabel.text == "2" {
             goedFunc()
             
             twoButton.setTitle("2", forState: .Normal)
             twoRowTwoButton.enabled = false
+            if let i = find(numberArray,2) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
         }
         updateMainView()
         calculatePercentage()
+        checkDone()
 
     }
     
     @IBAction func threeButtonPressed(sender: UIButton) {
-        if randomIndex != 3 {
+        if randomNumberLabel.text != "3" {
             foutFunc()
             
             threeButton.setTitle("", forState: .Normal)
             
             calculatePercentage()
-        } else if randomIndex == 3 {
+        } else if randomNumberLabel.text == "3" {
             goedFunc()
             
             threeButton.setTitle("3", forState: .Normal)
             threeButton.enabled = false
+            if let i = find(numberArray,3) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
         }
         updateMainView()
         calculatePercentage()
+        checkDone()
 
     }
         
     @IBAction func fourButtonPressed(sender: UIButton) {
-        if randomIndex != 4 {
+        if randomNumberLabel.text != "4" {
             foutFunc()
             
             fourbutton.setTitle("", forState: .Normal)
             
             calculatePercentage()
-        } else if randomIndex == 4 {
+        } else if randomNumberLabel.text == "4" {
             goedFunc()
             
             fourbutton.setTitle("4", forState: .Normal)
             fourbutton.enabled = false
+            if let i = find(numberArray,4) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
         }
         updateMainView()
         calculatePercentage()
-
+        checkDone()
+        
     }
     
     @IBAction func fiveButtonPressed(sender: UIButton) {
-        if randomIndex != 5 {
+        if randomNumberLabel.text != "5" {
             foutFunc()
             
             fiveButton.setTitle("", forState: .Normal)
             
             calculatePercentage()
-        } else if randomIndex == 5 {
+        } else if randomNumberLabel.text == "5" {
             goedFunc()
             
             fiveButton.setTitle("5", forState: .Normal)
             fiveButton.enabled = false
+            if let i = find(numberArray,5) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
         }
         updateMainView()
         calculatePercentage()
+        checkDone()
 
     }
     
     @IBAction func sixButtonPressed(sender: UIButton) {
-        if randomIndex != 6 {
+        if randomNumberLabel.text != "6" {
             foutFunc()
             
             sixButton.setTitle("", forState: .Normal)
             
             calculatePercentage()
-        } else if randomIndex == 6 {
+        } else if randomNumberLabel.text == "6" {
             goedFunc()
             
             sixButton.setTitle("6", forState: .Normal)
             sixButton.enabled = false
+            if let i = find(numberArray,6) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
         }
         updateMainView()
         calculatePercentage()
+        checkDone()
 
     }
     
     @IBAction func sevenButtonPressed(sender: UIButton) {
-        if randomIndex != 7 {
+        if randomNumberLabel.text != "7" {
             foutFunc()
             
             sevenButton.setTitle("", forState: .Normal)
             
             calculatePercentage()
-        } else if randomIndex == 7 {
+        } else if randomNumberLabel.text == "7" {
             goedFunc()
             
             sevenButton.setTitle("7", forState: .Normal)
             sevenButton.enabled = false
+            if let i = find(numberArray,7) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
         }
         updateMainView()
         calculatePercentage()
+        checkDone()
 
     }
     
     @IBAction func eightButtonPressed(sender: UIButton) {
-        if randomIndex != 8 {
+        if randomNumberLabel.text != "8" {
             foutFunc()
             
             eightButton.setTitle("", forState: .Normal)
             
             calculatePercentage()
-        } else if randomIndex == 8 {
+        } else if randomNumberLabel.text == "8" {
             goedFunc()
             
             eightButton.setTitle("8", forState: .Normal)
             eightButton.enabled = false
+            if let i = find(numberArray,8) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
         }
         updateMainView()
         calculatePercentage()
+        checkDone()
 
     }
     
     @IBAction func nineButtonPressed(sender: UIButton) {
-        if randomIndex != 9 {
+        if randomNumberLabel.text != "9" {
             foutFunc()
             
             nineButton.setTitle("", forState: .Normal)
             
             calculatePercentage()
-        } else if randomIndex == 9 {
+        } else if randomNumberLabel.text == "9" {
             goedFunc()
             
             nineButton.setTitle("9", forState: .Normal)
             nineButton.enabled = false
+            if let i = find(numberArray,9) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
         }
         updateMainView()
         calculatePercentage()
+        checkDone()
 
     }
     
     @IBAction func tenButtonPressed(sender: UIButton) {
-        if randomIndex != 10 {
+        if randomNumberLabel.text != "10" {
             foutFunc()
             
             tenButton.setTitle("", forState: .Normal)
             
             calculatePercentage()
-        } else if randomIndex == 10 {
+        } else if randomNumberLabel.text == "10" {
             goedFunc()
             
             tenButton.setTitle("10", forState: .Normal)
             tenButton.enabled = false
+            if let i = find(numberArray,10) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
         }
         updateMainView()
         calculatePercentage()
+        checkDone()
 
     }
     
     //Row 2
     
     @IBAction func twoRowTwoButtonPressed(sender: UIButton) {
-        if randomIndex != 2 {
+        if randomNumberLabel.text != "2" {
             foutFunc()
             
             twoRowTwoButton.setTitle("", forState: .Normal)
             
             calculatePercentage()
-        } else if randomIndex == 2 {
+        } else if randomNumberLabel.text == "2" {
             goedFunc()
             
             twoRowTwoButton.setTitle("2", forState: .Normal)
             twoRowTwoButton.enabled = false
+            if let i = find(numberArray,2) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
         }
         updateMainView()
         calculatePercentage()
+        checkDone()
 
     }
     
     @IBAction func fourRowTwoButtonPressed(sender: UIButton) {
-        if randomIndex != 4 {
+        if randomNumberLabel.text != "4" {
             foutFunc()
             
             fourRowTwoButton.setTitle("", forState: .Normal)
             
             calculatePercentage()
-        } else if randomIndex == 4 {
+        } else if randomNumberLabel.text == "4" {
             goedFunc()
             
             fourRowTwoButton.setTitle("4", forState: .Normal)
             fourRowTwoButton.enabled = false
+            if let i = find(numberArray,4) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
         }
         updateMainView()
         calculatePercentage()
+        checkDone()
 
     }
     
     @IBAction func sixRowTwoButtonPressed(sender: UIButton) {
-        if randomIndex != 6 {
+        if randomNumberLabel.text != "6" {
             foutFunc()
             
             sixRowTwoButton.setTitle("", forState: .Normal)
             
             calculatePercentage()
-        } else if randomIndex == 6 {
+        } else if randomNumberLabel.text == "6" {
             goedFunc()
             
             sixRowTwoButton.setTitle("6", forState: .Normal)
             sixRowTwoButton.enabled = false
+            if let i = find(numberArray,6) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
         }
         updateMainView()
         calculatePercentage()
+        checkDone()
     }
     
     @IBAction func eightRowTwoButtonPressed(sender: UIButton) {
-        if randomIndex != 8 {
+        if randomNumberLabel.text != "8" {
             foutFunc()
             
             eightRowTwoButton.setTitle("", forState: .Normal)
             
             calculatePercentage()
-        } else if randomIndex == 8 {
+        } else if randomNumberLabel.text == "8" {
             goedFunc()
             
             eightRowTwoButton.setTitle("8", forState: .Normal)
             eightRowTwoButton.enabled = false
+            if let i = find(numberArray,8) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
         }
         updateMainView()
         calculatePercentage()
+        checkDone()
     }
     
     @IBAction func tenRowTwoButtonPressed(sender: UIButton) {
-        if randomIndex != 10 {
+        if randomNumberLabel.text != "10" {
             foutFunc()
             
             tenRowTwoButton.setTitle("", forState: .Normal)
             
             calculatePercentage()
-        } else if randomIndex == 10 {
+        } else if randomNumberLabel.text == "10" {
             goedFunc()
             
             tenRowTwoButton.setTitle("10", forState: .Normal)
             tenRowTwoButton.enabled = false
+            if let i = find(numberArray,10) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
         }
         updateMainView()
         calculatePercentage()
+        checkDone()
     }
     
     @IBAction func twelveRowTwoButtonPressed(sender: UIButton) {
-        if randomIndex != 12 {
+        if randomNumberLabel.text != "12" {
             foutFunc()
             
             twelveRowTwoButton.setTitle("", forState: .Normal)
             
             calculatePercentage()
-        } else if randomIndex == 12 {
+        } else if randomNumberLabel.text == "12" {
             goedFunc()
             
             twelveRowTwoButton.setTitle("12", forState: .Normal)
             twelveRowTwoButton.enabled = false
+            if let i = find(numberArray,12) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
         }
         updateMainView()
         calculatePercentage()
+        checkDone()
     }
 
     @IBAction func fourteenRowTwoButtonPressed(sender: UIButton) {
-        if randomIndex != 14 {
+        if randomNumberLabel.text != "14" {
             foutFunc()
             
             fourteenRowTwoButton.setTitle("", forState: .Normal)
             
             calculatePercentage()
-        } else if randomIndex == 14 {
+        } else if randomNumberLabel.text == "14" {
             goedFunc()
             
             fourteenRowTwoButton.setTitle("14", forState: .Normal)
             fourteenRowTwoButton.enabled = false
+            if let i = find(numberArray,14) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
         }
         updateMainView()
         calculatePercentage()
+        checkDone()
     }
     
     @IBAction func sixteenRowTwoButtonPressed(sender: UIButton) {
-        if randomIndex != 16 {
+        if randomNumberLabel.text != "16" {
             foutFunc()
             
             sixteenRowTwoButton.setTitle("", forState: .Normal)
             
             calculatePercentage()
-        } else if randomIndex == 16 {
+        } else if randomNumberLabel.text == "16" {
             goedFunc()
             
             sixteenRowTwoButton.setTitle("16", forState: .Normal)
             sixteenRowTwoButton.enabled = false
+            if let i = find(numberArray,16) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
         }
         updateMainView()
         calculatePercentage()
+        checkDone()
     }
     
     @IBAction func eighteenRowTwoButtonPressed(sender: UIButton) {
-        if randomIndex != 18 {
+        if randomNumberLabel.text != "18" {
             foutFunc()
             
             eighteenRowTwoButton.setTitle("", forState: .Normal)
             
             calculatePercentage()
-        } else if randomIndex == 18 {
+        } else if randomNumberLabel.text == "18" {
             goedFunc()
             
             eighteenRowTwoButton.setTitle("18", forState: .Normal)
             eighteenRowTwoButton.enabled = false
+            if let i = find(numberArray,18) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
         }
         updateMainView()
         calculatePercentage()
+        checkDone()
     }
     
     @IBAction func twentyRowTwoButtonPressed(sender: UIButton) {
-        if randomIndex != 20 {
+        if randomNumberLabel.text != "20" {
             foutFunc()
             
             twentyRowTwoButton.setTitle("", forState: .Normal)
             
             calculatePercentage()
-        } else if randomIndex == 20 {
+        } else if randomNumberLabel.text == "20" {
             goedFunc()
             
             twentyRowTwoButton.setTitle("20", forState: .Normal)
             twentyRowTwoButton.enabled = false
+            if let i = find(numberArray,20) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
         }
         updateMainView()
         calculatePercentage()
+        checkDone()
     }
     
     //Row 3
     
     @IBAction func threeRowThreeButtonPressed(sender: UIButton) {
-        showAlertWithText()
+        if randomNumberLabel.text != "3" {
+            foutFunc()
+            
+            threeRowThreeButton.setTitle("", forState: .Normal)
+            
+            calculatePercentage()
+        } else if randomNumberLabel.text == "3" {
+            goedFunc()
+            
+            threeRowThreeButton.setTitle("3", forState: .Normal)
+            threeRowThreeButton.enabled = false
+            if let i = find(numberArray,3) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
+        }
+        updateMainView()
+        calculatePercentage()
+        checkDone()
     }
     
     @IBAction func sixRowThreeButtonPressed(sender: UIButton) {
-        
+        if randomNumberLabel.text != "6" {
+            foutFunc()
+            
+            sixRowThreeButton.setTitle("", forState: .Normal)
+            
+            calculatePercentage()
+        } else if randomNumberLabel.text == "6" {
+            goedFunc()
+            
+            sixRowThreeButton.setTitle("6", forState: .Normal)
+            sixRowThreeButton.enabled = false
+            if let i = find(numberArray,6) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
+        }
+        updateMainView()
+        calculatePercentage()
+        checkDone()
     }
     
     @IBAction func nineRowThreeButtonPressed(sender: UIButton) {
-        
+        if randomNumberLabel.text != "9" {
+            foutFunc()
+            
+            nineRowThreeButton.setTitle("", forState: .Normal)
+            
+            calculatePercentage()
+        } else if randomNumberLabel.text == "9" {
+            goedFunc()
+            
+            nineRowThreeButton.setTitle("9", forState: .Normal)
+            nineRowThreeButton.enabled = false
+            if let i = find(numberArray,9) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
+        }
+        updateMainView()
+        calculatePercentage()
+        checkDone()
     }
     
     @IBAction func twelveRowThreeButtonPressed(sender: UIButton) {
-        
+        if randomNumberLabel.text != "12" {
+            foutFunc()
+            
+            twelveRowThreeButton.setTitle("", forState: .Normal)
+            
+            calculatePercentage()
+        } else if randomNumberLabel.text == "12" {
+            goedFunc()
+            
+            twelveRowThreeButton.setTitle("12", forState: .Normal)
+            twelveRowThreeButton.enabled = false
+            if let i = find(numberArray,12) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
+        }
+        updateMainView()
+        calculatePercentage()
+        checkDone()
     }
     
     @IBAction func fifteenRowThreeButtonPressed(sender: UIButton) {
-        
+        if randomNumberLabel.text != "15" {
+            foutFunc()
+            
+            fifteenRowThreeButton.setTitle("", forState: .Normal)
+            
+            calculatePercentage()
+        } else if randomNumberLabel.text == "15" {
+            goedFunc()
+            
+            fifteenRowThreeButton.setTitle("15", forState: .Normal)
+            fifteenRowThreeButton.enabled = false
+            if let i = find(numberArray,15) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
+        }
+        updateMainView()
+        calculatePercentage()
+        checkDone()
     }
     
     @IBAction func eighteenRowThreeButtonPressed(sender: UIButton) {
-        
+        if randomNumberLabel.text != "18" {
+            foutFunc()
+            
+            eighteenRowThreeButton.setTitle("", forState: .Normal)
+            
+            calculatePercentage()
+        } else if randomNumberLabel.text == "18" {
+            goedFunc()
+            
+            eighteenRowThreeButton.setTitle("18", forState: .Normal)
+            eighteenRowThreeButton.enabled = false
+            if let i = find(numberArray,18) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
+        }
+        updateMainView()
+        calculatePercentage()
+        checkDone()
     }
     
     @IBAction func twentyOneRowThreeButtonPressed(sender: UIButton) {
-        
+        if randomNumberLabel.text != "21" {
+            foutFunc()
+            
+            twentyOneRowThreeButton.setTitle("", forState: .Normal)
+            
+            calculatePercentage()
+        } else if randomNumberLabel.text == "21" {
+            goedFunc()
+            
+            twentyOneRowThreeButton.setTitle("21", forState: .Normal)
+            twentyOneRowThreeButton.enabled = false
+            if let i = find(numberArray,21) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
+        }
+        updateMainView()
+        calculatePercentage()
+        checkDone()
     }
     
     @IBAction func twentyFourRowThreeButtonPressed(sender: UIButton) {
-        
+        if randomNumberLabel.text != "24" {
+            foutFunc()
+            
+            twentyFourRowThreeButton.setTitle("", forState: .Normal)
+            
+            calculatePercentage()
+        } else if randomNumberLabel.text == "24" {
+            goedFunc()
+            
+            twentyFourRowThreeButton.setTitle("24", forState: .Normal)
+            twentyFourRowThreeButton.enabled = false
+            if let i = find(numberArray,24) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
+        }
+        updateMainView()
+        calculatePercentage()
+        checkDone()
     }
     
     @IBAction func twentySevenRowThreeButtonPressed(sender: UIButton) {
-        
+        if randomNumberLabel.text != "27" {
+            foutFunc()
+            
+            twentySevenRowThreeButton.setTitle("", forState: .Normal)
+            
+            calculatePercentage()
+        } else if randomNumberLabel.text == "27" {
+            goedFunc()
+            
+            twentySevenRowThreeButton.setTitle("27", forState: .Normal)
+            twentySevenRowThreeButton.enabled = false
+            if let i = find(numberArray,27) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
+        }
+        updateMainView()
+        calculatePercentage()
+        checkDone()
     }
     
     @IBAction func thirtyRowThreeButtonPressed(sender: UIButton) {
-        
+        if randomNumberLabel.text != "30" {
+            foutFunc()
+            
+            thirtyRowThreeButton.setTitle("", forState: .Normal)
+            
+            calculatePercentage()
+        } else if randomNumberLabel.text == "30" {
+            goedFunc()
+            
+            thirtyRowThreeButton.setTitle("30", forState: .Normal)
+            thirtyRowThreeButton.enabled = false
+            if let i = find(numberArray,30) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
+        }
+        updateMainView()
+        calculatePercentage()
+        checkDone()
     }
     
     //Row 4
     
     @IBAction func fourRowFourButtonPressed(sender: UIButton) {
+        if randomNumberLabel.text != "4" {
+            foutFunc()
+            
+            fourRowFourButton.setTitle("", forState: .Normal)
+            
+            calculatePercentage()
+        } else if randomNumberLabel.text == "4" {
+            goedFunc()
+            
+            fourRowFourButton.setTitle("4", forState: .Normal)
+            fourRowFourButton.enabled = false
+            if let i = find(numberArray,4) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
+        }
+        updateMainView()
+        calculatePercentage()
+        checkDone()
     }
     
     @IBAction func eightRowFourButtonPressed(sender: UIButton) {
+        if randomNumberLabel.text != "8" {
+            foutFunc()
+            
+            eightRowFourButton.setTitle("", forState: .Normal)
+            
+            calculatePercentage()
+        } else if randomNumberLabel.text == "8" {
+            goedFunc()
+            
+            eightRowFourButton.setTitle("8", forState: .Normal)
+            eightRowFourButton.enabled = false
+            if let i = find(numberArray,8) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
+        }
+        updateMainView()
+        calculatePercentage()
+        checkDone()
     }
     
     @IBAction func twelveRowFourButtonPressed(sender: UIButton) {
+        if randomNumberLabel.text != "12" {
+            foutFunc()
+            
+            twelveRowFourButton.setTitle("", forState: .Normal)
+            
+            calculatePercentage()
+        } else if randomNumberLabel.text == "12" {
+            goedFunc()
+            
+            twelveRowFourButton.setTitle("12", forState: .Normal)
+            twelveRowFourButton.enabled = false
+            if let i = find(numberArray,12) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
+        }
+        updateMainView()
+        calculatePercentage()
+        checkDone()
     }
     
     @IBAction func sixteenRowFourButtonPressed(sender: UIButton) {
+        if randomNumberLabel.text != "16" {
+            foutFunc()
+            
+            sixteenRowFourButton.setTitle("", forState: .Normal)
+            
+            calculatePercentage()
+        } else if randomNumberLabel.text == "16" {
+            goedFunc()
+            
+            sixteenRowFourButton.setTitle("16", forState: .Normal)
+            sixteenRowFourButton.enabled = false
+            if let i = find(numberArray,16) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
+        }
+        updateMainView()
+        calculatePercentage()
+        checkDone()
     }
     
     @IBAction func twentyRowFourButtonPressed(sender: UIButton) {
+        if randomNumberLabel.text != "20" {
+            foutFunc()
+            
+            twentyRowFourButton.setTitle("", forState: .Normal)
+            
+            calculatePercentage()
+        } else if randomNumberLabel.text == "20" {
+            goedFunc()
+            
+            twentyRowFourButton.setTitle("20", forState: .Normal)
+            twentyRowFourButton.enabled = false
+            if let i = find(numberArray,20) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
+        }
+        updateMainView()
+        calculatePercentage()
+        checkDone()
     }
     
     @IBAction func twentyFourRowFourButtonPressed(sender: UIButton) {
+        if randomNumberLabel.text != "24" {
+            foutFunc()
+            
+            twentyFourRowFourButton.setTitle("", forState: .Normal)
+            
+            calculatePercentage()
+        } else if randomNumberLabel.text == "24" {
+            goedFunc()
+            
+            twentyFourRowFourButton.setTitle("24", forState: .Normal)
+            twentyFourRowFourButton.enabled = false
+            if let i = find(numberArray,24) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
+        }
+        updateMainView()
+        calculatePercentage()
+        checkDone()
     }
     
     @IBAction func twentyEightRowFourButtonPressed(sender: UIButton) {
+        if randomNumberLabel.text != "28" {
+            foutFunc()
+            
+            twentyEightRowFourButton.setTitle("", forState: .Normal)
+            
+            calculatePercentage()
+        } else if randomNumberLabel.text == "28" {
+            goedFunc()
+            
+            twentyEightRowFourButton.setTitle("28", forState: .Normal)
+            twentyEightRowFourButton.enabled = false
+            if let i = find(numberArray,28) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
+        }
+        updateMainView()
+        calculatePercentage()
+        checkDone()
     }
     
     @IBAction func thirtyTwoRowFourButtonPressed(sender: UIButton) {
+        if randomNumberLabel.text != "32" {
+            foutFunc()
+            
+            thirtyTwoRowFourButton.setTitle("", forState: .Normal)
+            
+            calculatePercentage()
+        } else if randomNumberLabel.text == "32" {
+            goedFunc()
+            
+            thirtyTwoRowFourButton.setTitle("32", forState: .Normal)
+            thirtyTwoRowFourButton.enabled = false
+            if let i = find(numberArray,32) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
+        }
+        updateMainView()
+        calculatePercentage()
+        checkDone()
     }
     
     @IBAction func thirtySixRowFourButtonPressed(sender: UIButton) {
+        if randomNumberLabel.text != "36" {
+            foutFunc()
+            
+            thirtySixRowFourButton.setTitle("", forState: .Normal)
+            
+            calculatePercentage()
+        } else if randomNumberLabel.text == "36" {
+            goedFunc()
+            
+            thirtySixRowFourButton.setTitle("36", forState: .Normal)
+            thirtySixRowFourButton.enabled = false
+            if let i = find(numberArray,36) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
+        }
+        updateMainView()
+        calculatePercentage()
+        checkDone()
     }
     
     @IBAction func fourtyRowFourButtonPressed(sender: UIButton) {
+        if randomNumberLabel.text != "40" {
+            foutFunc()
+            
+            fortyRowFourButton.setTitle("", forState: .Normal)
+            
+            calculatePercentage()
+        } else if randomNumberLabel.text == "40" {
+            goedFunc()
+            
+            fortyRowFourButton.setTitle("40", forState: .Normal)
+            fortyRowFourButton.enabled = false
+            if let i = find(numberArray,40) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
+        }
+        updateMainView()
+        calculatePercentage()
+        checkDone()
     }
     
     //Row 5
     
     @IBAction func fiveRowFiveButtonPressed(sender: UIButton) {
+        if randomNumberLabel.text != "5" {
+            foutFunc()
+            
+            fiveRowFiveButton.setTitle("", forState: .Normal)
+            
+            calculatePercentage()
+        } else if randomNumberLabel.text == "5" {
+            goedFunc()
+            
+            fiveRowFiveButton.setTitle("5", forState: .Normal)
+            fiveRowFiveButton.enabled = false
+            if let i = find(numberArray,5) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
+        }
+        updateMainView()
+        calculatePercentage()
+        checkDone()
     }
     
     @IBAction func tenRowFiveButtonPressed(sender: UIButton) {
+        if randomNumberLabel.text != "10" {
+            foutFunc()
+            
+            tenRowFiveButton.setTitle("", forState: .Normal)
+            
+            calculatePercentage()
+        } else if randomNumberLabel.text == "10" {
+            goedFunc()
+            
+            tenRowFiveButton.setTitle("10", forState: .Normal)
+            tenRowFiveButton.enabled = false
+            if let i = find(numberArray,10) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
+        }
+        updateMainView()
+        calculatePercentage()
+        checkDone()
     }
     
     @IBAction func fifteenRowFiveButtonPressed(sender: UIButton) {
+        if randomNumberLabel.text != "15" {
+            foutFunc()
+            
+            fifteenRowFiveButton.setTitle("", forState: .Normal)
+            
+            calculatePercentage()
+        } else if randomNumberLabel.text == "15" {
+            goedFunc()
+            
+            fifteenRowFiveButton.setTitle("15", forState: .Normal)
+            fifteenRowFiveButton.enabled = false
+            if let i = find(numberArray,15) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
+        }
+        updateMainView()
+        calculatePercentage()
+        checkDone()
     }
     
     @IBAction func twentyRowFiveButtonPressed(sender: UIButton) {
+        if randomNumberLabel.text != "20" {
+            foutFunc()
+            
+            twentyRowFiveButton.setTitle("", forState: .Normal)
+            
+            calculatePercentage()
+        } else if randomNumberLabel.text == "20" {
+            goedFunc()
+            
+            twentyRowFiveButton.setTitle("20", forState: .Normal)
+            twentyRowFiveButton.enabled = false
+            if let i = find(numberArray,20) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
+        }
+        updateMainView()
+        calculatePercentage()
+        checkDone()
     }
 
     @IBAction func twentyFiveRowFiveButtonPressed(sender: UIButton) {
+        if randomNumberLabel.text != "25" {
+            foutFunc()
+            
+            twentyFiveRowFiveButton.setTitle("", forState: .Normal)
+            
+            calculatePercentage()
+        } else if randomNumberLabel.text == "25" {
+            goedFunc()
+            
+            twentyFiveRowFiveButton.setTitle("25", forState: .Normal)
+            twentyFiveRowFiveButton.enabled = false
+            if let i = find(numberArray,25) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
+        }
+        updateMainView()
+        calculatePercentage()
+        checkDone()
     }
     
     @IBAction func thirtyRowFiveButtonPressed(sender: UIButton) {
+        if randomNumberLabel.text != "30" {
+            foutFunc()
+            
+            thirtyRowFiveButton.setTitle("", forState: .Normal)
+            
+            calculatePercentage()
+        } else if randomNumberLabel.text == "30" {
+            goedFunc()
+            
+            thirtyRowFiveButton.setTitle("30", forState: .Normal)
+            thirtyRowFiveButton.enabled = false
+            if let i = find(numberArray,30) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
+        }
+        updateMainView()
+        calculatePercentage()
+        checkDone()
     }
     
     @IBAction func thirtyFiveRowFiveButtonPressed(sender: UIButton) {
+        if randomNumberLabel.text != "35" {
+            foutFunc()
+            
+            thirtyFiveRowFiveButton.setTitle("", forState: .Normal)
+            
+            calculatePercentage()
+        } else if randomNumberLabel.text == "35" {
+            goedFunc()
+            
+            thirtyFiveRowFiveButton.setTitle("35", forState: .Normal)
+            thirtyFiveRowFiveButton.enabled = false
+            if let i = find(numberArray,35) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
+        }
+        updateMainView()
+        calculatePercentage()
+        checkDone()
     }
     
     @IBAction func fortyRowFiveButtonPressed(sender: UIButton) {
+        if randomNumberLabel.text != "40" {
+            foutFunc()
+            
+            fortyRowFiveButton.setTitle("", forState: .Normal)
+            
+            calculatePercentage()
+        } else if randomNumberLabel.text == "40" {
+            goedFunc()
+            
+            fortyRowFiveButton.setTitle("40", forState: .Normal)
+            fortyRowFiveButton.enabled = false
+            if let i = find(numberArray,40) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
+        }
+        updateMainView()
+        calculatePercentage()
+        checkDone()
     }
     
     @IBAction func fortyFiveRowFiveButtonPressed(sender: UIButton) {
+        if randomNumberLabel.text != "45" {
+            foutFunc()
+            
+            fortyFiveRowFiveButton.setTitle("", forState: .Normal)
+            
+            calculatePercentage()
+        } else if randomNumberLabel.text == "45" {
+            goedFunc()
+            
+            fortyFiveRowFiveButton.setTitle("45", forState: .Normal)
+            fortyFiveRowFiveButton.enabled = false
+            if let i = find(numberArray,45) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
+        }
+        updateMainView()
+        calculatePercentage()
+        checkDone()
     }
     
     @IBAction func fiftyRowFiveButtonPressed(sender: UIButton) {
+        if randomNumberLabel.text != "50" {
+            foutFunc()
+            
+            fiftyRowFiveButton.setTitle("", forState: .Normal)
+            
+            calculatePercentage()
+        } else if randomNumberLabel.text == "50" {
+            goedFunc()
+            
+            fiftyRowFiveButton.setTitle("50", forState: .Normal)
+            fiftyRowFiveButton.enabled = false
+            if let i = find(numberArray,50) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
+        }
+        updateMainView()
+        calculatePercentage()
+        checkDone()
     }
     
     //Row 6
     
     @IBAction func sixRowSixButtonPressed(sender: UIButton) {
+        if randomNumberLabel.text != "6" {
+            foutFunc()
+            
+            sixRowSixButton.setTitle("", forState: .Normal)
+            
+            calculatePercentage()
+        } else if randomNumberLabel.text == "6" {
+            goedFunc()
+            
+            sixRowSixButton.setTitle("6", forState: .Normal)
+            sixRowSixButton.enabled = false
+            if let i = find(numberArray,6) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
+        }
+        updateMainView()
+        calculatePercentage()
+        checkDone()
     }
     
     @IBAction func twelveRowSixButtonPressed(sender: UIButton) {
+        if randomNumberLabel.text != "12" {
+            foutFunc()
+            
+            twelveRowSixButton.setTitle("", forState: .Normal)
+            
+            calculatePercentage()
+        } else if randomNumberLabel.text == "12" {
+            goedFunc()
+            
+            twelveRowSixButton.setTitle("12", forState: .Normal)
+            twelveRowSixButton.enabled = false
+            if let i = find(numberArray,12) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
+        }
+        updateMainView()
+        calculatePercentage()
+        checkDone()
     }
     
     @IBAction func eighteenRowSixButtonPressed(sender: UIButton) {
+        if randomNumberLabel.text != "18" {
+            foutFunc()
+            
+            eighteenRowSixButton.setTitle("", forState: .Normal)
+            
+            calculatePercentage()
+        } else if randomNumberLabel.text == "18" {
+            goedFunc()
+            
+            eighteenRowSixButton.setTitle("18", forState: .Normal)
+            eighteenRowSixButton.enabled = false
+            if let i = find(numberArray,18) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
+        }
+        updateMainView()
+        calculatePercentage()
+        checkDone()
     }
     
     @IBAction func twentyFourRowSixButtonPressed(sender: UIButton) {
+        if randomNumberLabel.text != "24" {
+            foutFunc()
+            
+            twentyFourRowSixButton.setTitle("", forState: .Normal)
+            
+            calculatePercentage()
+        } else if randomNumberLabel.text == "24" {
+            goedFunc()
+            
+            twentyFourRowSixButton.setTitle("24", forState: .Normal)
+            twentyFourRowSixButton.enabled = false
+            if let i = find(numberArray,24) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
+        }
+        updateMainView()
+        calculatePercentage()
+        checkDone()
     }
     
     @IBAction func thirtyRowSixButtonPressed(sender: UIButton) {
+        if randomNumberLabel.text != "30" {
+            foutFunc()
+            
+            thirtyRowSixButton.setTitle("", forState: .Normal)
+            
+            calculatePercentage()
+        } else if randomNumberLabel.text == "30" {
+            goedFunc()
+            
+            thirtyRowSixButton.setTitle("30", forState: .Normal)
+            thirtyRowSixButton.enabled = false
+            if let i = find(numberArray,30) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
+        }
+        updateMainView()
+        calculatePercentage()
+        checkDone()
     }
     
     @IBAction func thirtySixRowSixButtonPressed(sender: UIButton) {
+        if randomNumberLabel.text != "36" {
+            foutFunc()
+            
+            thirtySixRowSixButton.setTitle("", forState: .Normal)
+            
+            calculatePercentage()
+        } else if randomNumberLabel.text == "36" {
+            goedFunc()
+            
+            thirtySixRowSixButton.setTitle("36", forState: .Normal)
+            thirtySixRowSixButton.enabled = false
+            if let i = find(numberArray,36) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
+        }
+        updateMainView()
+        calculatePercentage()
+        checkDone()
     }
     
     @IBAction func fortyTwoRowSixButtonPressed(sender: UIButton) {
+        if randomNumberLabel.text != "42" {
+            foutFunc()
+            
+            fortyTwoRowSixButton.setTitle("", forState: .Normal)
+            
+            calculatePercentage()
+        } else if randomNumberLabel.text == "42" {
+            goedFunc()
+            
+            fortyTwoRowSixButton.setTitle("42", forState: .Normal)
+            fortyTwoRowSixButton.enabled = false
+            if let i = find(numberArray,42) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
+        }
+        updateMainView()
+        calculatePercentage()
+        checkDone()
     }
     
     @IBAction func fortyEightRowSixButtonPressed(sender: UIButton) {
+        if randomNumberLabel.text != "48" {
+            foutFunc()
+            
+            fortyEightRowSixButton.setTitle("", forState: .Normal)
+            
+            calculatePercentage()
+        } else if randomNumberLabel.text == "48" {
+            goedFunc()
+            
+            fortyEightRowSixButton.setTitle("48", forState: .Normal)
+            fortyEightRowSixButton.enabled = false
+            if let i = find(numberArray,48) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
+        }
+        updateMainView()
+        calculatePercentage()
+        checkDone()
     }
     
     @IBAction func fiftyFourRowSixButtonPressed(sender: UIButton) {
+        if randomNumberLabel.text != "54" {
+            foutFunc()
+            
+            fiftyFourRowSixButton.setTitle("", forState: .Normal)
+            
+            calculatePercentage()
+        } else if randomNumberLabel.text == "54" {
+            goedFunc()
+            
+            fiftyFourRowSixButton.setTitle("54", forState: .Normal)
+            fiftyFourRowSixButton.enabled = false
+            if let i = find(numberArray,54) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
+        }
+        updateMainView()
+        calculatePercentage()
+        checkDone()
     }
     
     @IBAction func sixtyRowSixButtonPressed(sender: UIButton) {
+        if randomNumberLabel.text != "60" {
+            foutFunc()
+            
+            sixtyRowSixButton.setTitle("", forState: .Normal)
+            
+            calculatePercentage()
+        } else if randomNumberLabel.text == "60" {
+            goedFunc()
+            
+            sixtyRowSixButton.setTitle("60", forState: .Normal)
+            sixtyRowSixButton.enabled = false
+            if let i = find(numberArray,60) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
+        }
+        updateMainView()
+        calculatePercentage()
+        checkDone()
     }
     
     //Row 7
     
     @IBAction func sevenRowSevenButtonPressed(sender: UIButton) {
+        if randomNumberLabel.text != "7" {
+            foutFunc()
+            
+            sevenRowSevenButton.setTitle("", forState: .Normal)
+            
+            calculatePercentage()
+        } else if randomNumberLabel.text == "7" {
+            goedFunc()
+            
+            sevenRowSevenButton.setTitle("7", forState: .Normal)
+            sevenRowSevenButton.enabled = false
+            if let i = find(numberArray,7) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
+        }
+        updateMainView()
+        calculatePercentage()
+        checkDone()
     }
     
     @IBAction func fourteenRowSevenButtonPressed(sender: UIButton) {
+        if randomNumberLabel.text != "14" {
+            foutFunc()
+            
+            fourteenRowSevenButton.setTitle("", forState: .Normal)
+            
+            calculatePercentage()
+        } else if randomNumberLabel.text == "14" {
+            goedFunc()
+            
+            fourteenRowSevenButton.setTitle("14", forState: .Normal)
+            fourteenRowSevenButton.enabled = false
+            if let i = find(numberArray,14) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
+        }
+        updateMainView()
+        calculatePercentage()
+        checkDone()
     }
     
     @IBAction func twentyOneRowSevenButtonPressed(sender: UIButton) {
+        if randomNumberLabel.text != "21" {
+            foutFunc()
+            
+            twentyOneRowSevenButton.setTitle("", forState: .Normal)
+            
+            calculatePercentage()
+        } else if randomNumberLabel.text == "21" {
+            goedFunc()
+            
+            twentyOneRowSevenButton.setTitle("21", forState: .Normal)
+            twentyOneRowSevenButton.enabled = false
+            if let i = find(numberArray,21) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
+        }
+        updateMainView()
+        calculatePercentage()
+        checkDone()
     }
     
     @IBAction func twentyEightRowSevenButtonPressed(sender: UIButton) {
+        if randomNumberLabel.text != "28" {
+            foutFunc()
+            
+            twentyEightRowSevenButton.setTitle("", forState: .Normal)
+            
+            calculatePercentage()
+        } else if randomNumberLabel.text == "28" {
+            goedFunc()
+            
+            twentyEightRowSevenButton.setTitle("28", forState: .Normal)
+            twentyEightRowSevenButton.enabled = false
+            if let i = find(numberArray,28) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
+        }
+        updateMainView()
+        calculatePercentage()
+        checkDone()
     }
     
     @IBAction func thirtyFiveRowSevenButtonPressed(sender: UIButton) {
+        if randomNumberLabel.text != "35" {
+            foutFunc()
+            
+            thirtyFiveRowSevenButton.setTitle("", forState: .Normal)
+            
+            calculatePercentage()
+        } else if randomNumberLabel.text == "35" {
+            goedFunc()
+            
+            thirtyFiveRowSevenButton.setTitle("35", forState: .Normal)
+            thirtyFiveRowSevenButton.enabled = false
+            if let i = find(numberArray,35) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
+        }
+        updateMainView()
+        calculatePercentage()
+        checkDone()
     }
     
     @IBAction func fortyTwoRowSevenButtonPressed(sender: UIButton) {
+        if randomNumberLabel.text != "42" {
+            foutFunc()
+            
+            fortyTwoRowSevenButton.setTitle("", forState: .Normal)
+            
+            calculatePercentage()
+        } else if randomNumberLabel.text == "42" {
+            goedFunc()
+            
+            fortyTwoRowSevenButton.setTitle("42", forState: .Normal)
+            fortyTwoRowSevenButton.enabled = false
+            if let i = find(numberArray,42) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
+        }
+        updateMainView()
+        calculatePercentage()
+        checkDone()
     }
     
     @IBAction func fortyNineRowSevenButtonPressed(sender: UIButton) {
+        if randomNumberLabel.text != "49" {
+            foutFunc()
+            
+            fortyNineRowSevenButton.setTitle("", forState: .Normal)
+            
+            calculatePercentage()
+        } else if randomNumberLabel.text == "49" {
+            goedFunc()
+            
+            fortyNineRowSevenButton.setTitle("49", forState: .Normal)
+            fortyNineRowSevenButton.enabled = false
+            if let i = find(numberArray,49) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
+        }
+        updateMainView()
+        calculatePercentage()
+        checkDone()
     }
     
     @IBAction func fiftySixRowSevenButtonPressed(sender: UIButton) {
+        if randomNumberLabel.text != "56" {
+            foutFunc()
+            
+            fiftySixRowSevenButton.setTitle("", forState: .Normal)
+            
+            calculatePercentage()
+        } else if randomNumberLabel.text == "56" {
+            goedFunc()
+            
+            fiftySixRowSevenButton.setTitle("56", forState: .Normal)
+            fiftySixRowSevenButton.enabled = false
+            if let i = find(numberArray,56) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
+        }
+        updateMainView()
+        calculatePercentage()
+        checkDone()
     }
     
     @IBAction func sixtyThreeRowSevenButtonPressed(sender: UIButton) {
+        if randomNumberLabel.text != "63" {
+            foutFunc()
+            
+            sixtyThreeRowSevenButton.setTitle("", forState: .Normal)
+            
+            calculatePercentage()
+        } else if randomNumberLabel.text == "63" {
+            goedFunc()
+            
+            sixtyThreeRowSevenButton.setTitle("63", forState: .Normal)
+            sixtyThreeRowSevenButton.enabled = false
+            if let i = find(numberArray,63) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
+        }
+        updateMainView()
+        calculatePercentage()
+        checkDone()
     }
     
     @IBAction func seventyRowSevenButtonPressed(sender: UIButton) {
+        if randomNumberLabel.text != "70" {
+            foutFunc()
+            
+            seventyRowSevenButton.setTitle("", forState: .Normal)
+            
+            calculatePercentage()
+        } else if randomNumberLabel.text == "70" {
+            goedFunc()
+            
+            seventyRowSevenButton.setTitle("70", forState: .Normal)
+            seventyRowSevenButton.enabled = false
+            if let i = find(numberArray,70) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
+        }
+        updateMainView()
+        calculatePercentage()
+        checkDone()
     }
     
     //Row 8
     
     @IBAction func eightRowEightButtonPressed(sender: UIButton) {
+        if randomNumberLabel.text != "8" {
+            foutFunc()
+            
+            eightRowEightButton.setTitle("", forState: .Normal)
+            
+            calculatePercentage()
+        } else if randomNumberLabel.text == "8" {
+            goedFunc()
+            
+            eightRowEightButton.setTitle("8", forState: .Normal)
+            eightRowEightButton.enabled = false
+            if let i = find(numberArray,8) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
+        }
+        updateMainView()
+        calculatePercentage()
+        checkDone()
     }
     
     @IBAction func sixteenRowEightButtonPressed(sender: UIButton) {
+        if randomNumberLabel.text != "16" {
+            foutFunc()
+            
+            sixteenRowEightButton.setTitle("", forState: .Normal)
+            
+            calculatePercentage()
+        } else if randomNumberLabel.text == "16" {
+            goedFunc()
+            
+            sixteenRowEightButton.setTitle("16", forState: .Normal)
+            sixteenRowEightButton.enabled = false
+            if let i = find(numberArray,16) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
+        }
+        updateMainView()
+        calculatePercentage()
+        checkDone()
     }
     
     @IBAction func twentyFourRowEightButtonPressed(sender: UIButton) {
+        if randomNumberLabel.text != "24" {
+            foutFunc()
+            
+            twentyFourRowEightButton.setTitle("", forState: .Normal)
+            
+            calculatePercentage()
+        } else if randomNumberLabel.text == "24" {
+            goedFunc()
+            
+            twentyFourRowEightButton.setTitle("24", forState: .Normal)
+            twentyFourRowEightButton.enabled = false
+            if let i = find(numberArray,24) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
+        }
+        updateMainView()
+        calculatePercentage()
+        checkDone()
     }
     
     @IBAction func thirtyTwoRowEightButtonPressed(sender: UIButton) {
+        if randomNumberLabel.text != "32" {
+            foutFunc()
+            
+            thirtyTwoRowEightButton.setTitle("", forState: .Normal)
+            
+            calculatePercentage()
+        } else if randomNumberLabel.text == "32" {
+            goedFunc()
+            
+            thirtyTwoRowEightButton.setTitle("32", forState: .Normal)
+            thirtyTwoRowEightButton.enabled = false
+            if let i = find(numberArray,32) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
+        }
+        updateMainView()
+        calculatePercentage()
+        checkDone()
     }
     
     @IBAction func fortyRowEightButtonPressed(sender: UIButton) {
+        if randomNumberLabel.text != "40" {
+            foutFunc()
+            
+            fortyRowEightButton.setTitle("", forState: .Normal)
+            
+            calculatePercentage()
+        } else if randomNumberLabel.text == "40" {
+            goedFunc()
+            
+            fortyRowEightButton.setTitle("40", forState: .Normal)
+            fortyRowEightButton.enabled = false
+            if let i = find(numberArray,40) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
+        }
+        updateMainView()
+        calculatePercentage()
+        checkDone()
     }
     
     @IBAction func fortyEightRowEightButtonPressed(sender: UIButton) {
+        if randomNumberLabel.text != "48" {
+            foutFunc()
+            
+            fortyEightRowEightButton.setTitle("", forState: .Normal)
+            
+            calculatePercentage()
+        } else if randomNumberLabel.text == "48" {
+            goedFunc()
+            
+            fortyEightRowEightButton.setTitle("48", forState: .Normal)
+            fortyEightRowEightButton.enabled = false
+            if let i = find(numberArray,48) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
+        }
+        updateMainView()
+        calculatePercentage()
+        checkDone()
     }
     
     @IBAction func fiftySixRowEightButtonPressed(sender: UIButton) {
+        if randomNumberLabel.text != "56" {
+            foutFunc()
+            
+            fiftySixRowEightButton.setTitle("", forState: .Normal)
+            
+            calculatePercentage()
+        } else if randomNumberLabel.text == "56" {
+            goedFunc()
+            
+            fiftySixRowEightButton.setTitle("56", forState: .Normal)
+            fiftySixRowEightButton.enabled = false
+            if let i = find(numberArray,56) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
+        }
+        updateMainView()
+        calculatePercentage()
+        checkDone()
     }
     
     @IBAction func sixtyFourRowEightButtonPressed(sender: UIButton) {
+        if randomNumberLabel.text != "64" {
+            foutFunc()
+            
+            sixtyFourRowEightButton.setTitle("", forState: .Normal)
+            
+            calculatePercentage()
+        } else if randomNumberLabel.text == "64" {
+            goedFunc()
+            
+            sixtyFourRowEightButton.setTitle("64", forState: .Normal)
+            sixtyFourRowEightButton.enabled = false
+            if let i = find(numberArray,64) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
+        }
+        updateMainView()
+        calculatePercentage()
+        checkDone()
     }
     
     @IBAction func seventyTwoRowEightButtonPressed(sender: UIButton) {
+        if randomNumberLabel.text != "72" {
+            foutFunc()
+            
+            seventyTwoRowEightButton.setTitle("", forState: .Normal)
+            
+            calculatePercentage()
+        } else if randomNumberLabel.text == "72" {
+            goedFunc()
+            
+            seventyTwoRowEightButton.setTitle("72", forState: .Normal)
+            seventyTwoRowEightButton.enabled = false
+            if let i = find(numberArray,72) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
+        }
+        updateMainView()
+        calculatePercentage()
+        checkDone()
     }
     
     @IBAction func eightyRowEightButtonPressed(sender: UIButton) {
+        if randomNumberLabel.text != "80" {
+            foutFunc()
+            
+            eightyRowEightButton.setTitle("", forState: .Normal)
+            
+            calculatePercentage()
+        } else if randomNumberLabel.text == "80" {
+            goedFunc()
+            
+            eightyRowEightButton.setTitle("80", forState: .Normal)
+            eightyRowEightButton.enabled = false
+            if let i = find(numberArray,80) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
+        }
+        updateMainView()
+        calculatePercentage()
+        checkDone()
     }
     
     //Row 9
     
     @IBAction func nineRowNineButtonPressed(sender: UIButton) {
+        if randomNumberLabel.text != "9" {
+            foutFunc()
+            
+            nineRowNineButton.setTitle("", forState: .Normal)
+            
+            calculatePercentage()
+        } else if randomNumberLabel.text == "9" {
+            goedFunc()
+            
+            nineRowNineButton.setTitle("9", forState: .Normal)
+            nineRowNineButton.enabled = false
+            if let i = find(numberArray,9) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
+        }
+        updateMainView()
+        calculatePercentage()
+        checkDone()
     }
     
     @IBAction func eighteenRowNineButtonPressed(sender: UIButton) {
+        if randomNumberLabel.text != "18" {
+            foutFunc()
+            
+            eighteenRowNineButton.setTitle("", forState: .Normal)
+            
+            calculatePercentage()
+        } else if randomNumberLabel.text == "18" {
+            goedFunc()
+            
+            eighteenRowNineButton.setTitle("18", forState: .Normal)
+            eighteenRowNineButton.enabled = false
+            if let i = find(numberArray,18) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
+        }
+        updateMainView()
+        calculatePercentage()
+        checkDone()
     }
     
     @IBAction func twentySevenRowNineButtonPressed(sender: UIButton) {
+        if randomNumberLabel.text != "27" {
+            foutFunc()
+            
+            twentySevenRowNineButton.setTitle("", forState: .Normal)
+            
+            calculatePercentage()
+        } else if randomNumberLabel.text == "27" {
+            goedFunc()
+            
+            twentySevenRowNineButton.setTitle("27", forState: .Normal)
+            twentySevenRowNineButton.enabled = false
+            if let i = find(numberArray,27) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
+        }
+        updateMainView()
+        calculatePercentage()
+        checkDone()
     }
     
     @IBAction func thirtySixRowNineButtonPressed(sender: UIButton) {
+        if randomNumberLabel.text != "36" {
+            foutFunc()
+            
+            thirtySixRowNineButton.setTitle("", forState: .Normal)
+            
+            calculatePercentage()
+        } else if randomNumberLabel.text == "36" {
+            goedFunc()
+            
+            thirtySixRowNineButton.setTitle("36", forState: .Normal)
+            thirtySixRowNineButton.enabled = false
+            if let i = find(numberArray,36) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
+        }
+        updateMainView()
+        calculatePercentage()
+        checkDone()
     }
     
     @IBAction func fortyFiveRowNineButtonPressed(sender: UIButton) {
+        if randomNumberLabel.text != "45" {
+            foutFunc()
+            
+            fortyFiveRowNineButton.setTitle("", forState: .Normal)
+            
+            calculatePercentage()
+        } else if randomNumberLabel.text == "45" {
+            goedFunc()
+            
+            fortyFiveRowNineButton.setTitle("45", forState: .Normal)
+            fortyFiveRowNineButton.enabled = false
+            if let i = find(numberArray,45) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
+        }
+        updateMainView()
+        calculatePercentage()
+        checkDone()
     }
     
     @IBAction func fiftyFourRowNineButtonPressed(sender: UIButton) {
+        if randomNumberLabel.text != "54" {
+            foutFunc()
+            
+            fiftyFourRowNineButton.setTitle("", forState: .Normal)
+            
+            calculatePercentage()
+        } else if randomNumberLabel.text == "54" {
+            goedFunc()
+            
+            fiftyFourRowNineButton.setTitle("54", forState: .Normal)
+            fiftyFourRowNineButton.enabled = false
+            if let i = find(numberArray,54) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
+        }
+        updateMainView()
+        calculatePercentage()
+        checkDone()
     }
     
     @IBAction func sixtyThreeRowNineButtonPressed(sender: UIButton) {
+        if randomNumberLabel.text != "63" {
+            foutFunc()
+            
+            sixtyThreeRowNineButton.setTitle("", forState: .Normal)
+            
+            calculatePercentage()
+        } else if randomNumberLabel.text == "63" {
+            goedFunc()
+            
+            sixtyThreeRowNineButton.setTitle("63", forState: .Normal)
+            sixtyThreeRowNineButton.enabled = false
+            if let i = find(numberArray,63) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
+        }
+        updateMainView()
+        calculatePercentage()
+        checkDone()
     }
     
     @IBAction func seventyTwoRowNineButtonPressed(sender: UIButton) {
+        if randomNumberLabel.text != "72" {
+            foutFunc()
+            
+            seventyTwoRowNineButton.setTitle("", forState: .Normal)
+            
+            calculatePercentage()
+        } else if randomNumberLabel.text == "72" {
+            goedFunc()
+            
+            seventyTwoRowNineButton.setTitle("72", forState: .Normal)
+            seventyTwoRowNineButton.enabled = false
+            if let i = find(numberArray,72) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
+        }
+        updateMainView()
+        calculatePercentage()
+        checkDone()
     }
     
     @IBAction func eightyOneRowNineButtonPressed(sender: UIButton) {
+        if randomNumberLabel.text != "81" {
+            foutFunc()
+            
+            eightyOneRowNineButton.setTitle("", forState: .Normal)
+            
+            calculatePercentage()
+        } else if randomNumberLabel.text == "81" {
+            goedFunc()
+            
+            eightyOneRowNineButton.setTitle("81", forState: .Normal)
+            eightyOneRowNineButton.enabled = false
+            if let i = find(numberArray,81) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
+        }
+        updateMainView()
+        calculatePercentage()
+        checkDone()
     }
     
     @IBAction func ninetyRowNineButtonPressed(sender: UIButton) {
+        if randomNumberLabel.text != "90" {
+            foutFunc()
+            
+            ninetyRowNineButton.setTitle("", forState: .Normal)
+            
+            calculatePercentage()
+        } else if randomNumberLabel.text == "90" {
+            goedFunc()
+            
+            ninetyRowNineButton.setTitle("90", forState: .Normal)
+            ninetyRowNineButton.enabled = false
+            if let i = find(numberArray,90) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
+        }
+        updateMainView()
+        calculatePercentage()
+        checkDone()
     }
     
     //Row 10
     
     @IBAction func tenRowTenButtonPressed(sender: UIButton) {
+        if randomNumberLabel.text != "10" {
+            foutFunc()
+            
+            tenRowTenButton.setTitle("", forState: .Normal)
+            
+            calculatePercentage()
+        } else if randomNumberLabel.text == "10" {
+            goedFunc()
+            
+            tenRowTenButton.setTitle("10", forState: .Normal)
+            tenRowTenButton.enabled = false
+            if let i = find(numberArray,10) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
+        }
+        updateMainView()
+        calculatePercentage()
+        checkDone()
     }
     
     @IBAction func twentyRowTenButtonPressed(sender: UIButton) {
+        if randomNumberLabel.text != "20" {
+            foutFunc()
+            
+            twentyRowTenButton.setTitle("", forState: .Normal)
+            
+            calculatePercentage()
+        } else if randomNumberLabel.text == "20" {
+            goedFunc()
+            
+            twentyRowTenButton.setTitle("20", forState: .Normal)
+            twentyRowTenButton.enabled = false
+            if let i = find(numberArray,20) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
+        }
+        updateMainView()
+        calculatePercentage()
+        checkDone()
     }
     
     @IBAction func thirtyRowTenButtonPressed(sender: UIButton) {
+        if randomNumberLabel.text != "30" {
+            foutFunc()
+            
+            thirtyRowTenButton.setTitle("", forState: .Normal)
+            
+            calculatePercentage()
+        } else if randomNumberLabel.text == "30" {
+            goedFunc()
+            
+            thirtyRowTenButton.setTitle("30", forState: .Normal)
+            thirtyRowTenButton.enabled = false
+            if let i = find(numberArray,30) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
+        }
+        updateMainView()
+        calculatePercentage()
+        checkDone()
     }
     
     @IBAction func fortyRowTenButtonPressed(sender: UIButton) {
+        if randomNumberLabel.text != "40" {
+            foutFunc()
+            
+            fortyRowTenButton.setTitle("", forState: .Normal)
+            
+            calculatePercentage()
+        } else if randomNumberLabel.text == "40" {
+            goedFunc()
+            
+            fortyRowTenButton.setTitle("40", forState: .Normal)
+            fortyRowTenButton.enabled = false
+            if let i = find(numberArray,40) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
+        }
+        updateMainView()
+        calculatePercentage()
+        checkDone()
     }
     
     @IBAction func fiftyRowTenButtonPressed(sender: UIButton) {
+        if randomNumberLabel.text != "50" {
+            foutFunc()
+            
+            fiftyRowTenButton.setTitle("", forState: .Normal)
+            
+            calculatePercentage()
+        } else if randomNumberLabel.text == "50" {
+            goedFunc()
+            
+            fiftyRowTenButton.setTitle("50", forState: .Normal)
+            fiftyRowTenButton.enabled = false
+            if let i = find(numberArray,50) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
+        }
+        updateMainView()
+        calculatePercentage()
+        checkDone()
     }
     
     @IBAction func sixtyRowTenButtonPressed(sender: UIButton) {
+        if randomNumberLabel.text != "60" {
+            foutFunc()
+            
+            sixtyRowTenButton.setTitle("", forState: .Normal)
+            
+            calculatePercentage()
+        } else if randomNumberLabel.text == "60" {
+            goedFunc()
+            
+            sixtyRowTenButton.setTitle("60", forState: .Normal)
+            sixtyRowTenButton.enabled = false
+            if let i = find(numberArray,60) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
+        }
+        updateMainView()
+        calculatePercentage()
+        checkDone()
     }
     
     @IBAction func seventyRowTenButtonPressed(sender: UIButton) {
+        if randomNumberLabel.text != "70" {
+            foutFunc()
+            
+            seventyRowTenButton.setTitle("", forState: .Normal)
+            
+            calculatePercentage()
+        } else if randomNumberLabel.text == "70" {
+            goedFunc()
+            
+            seventyRowTenButton.setTitle("70", forState: .Normal)
+            seventyRowTenButton.enabled = false
+            if let i = find(numberArray,70) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
+        }
+        updateMainView()
+        calculatePercentage()
+        checkDone()
     }
     
     @IBAction func eightyRowTenButtonPressed(sender: UIButton) {
+        if randomNumberLabel.text != "80" {
+            foutFunc()
+            
+            eightyRowTenButton.setTitle("", forState: .Normal)
+            
+            calculatePercentage()
+        } else if randomNumberLabel.text == "80" {
+            goedFunc()
+            
+            eightyRowTenButton.setTitle("80", forState: .Normal)
+            eightyRowTenButton.enabled = false
+            if let i = find(numberArray,80) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
+        }
+        updateMainView()
+        calculatePercentage()
+        checkDone()
     }
     
     @IBAction func ninetyRowTenButtonPressed(sender: UIButton) {
+        if randomNumberLabel.text != "90" {
+            foutFunc()
+            
+            ninetyRowTenButton.setTitle("", forState: .Normal)
+            
+            calculatePercentage()
+        } else if randomNumberLabel.text == "90" {
+            goedFunc()
+            
+            ninetyRowTenButton.setTitle("90", forState: .Normal)
+            ninetyRowTenButton.enabled = false
+            if let i = find(numberArray,90) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
+        }
+        updateMainView()
+        calculatePercentage()
+        checkDone()
     }
     
     @IBAction func oneHunderedButtonPressed(sender: UIButton) {
-        if randomIndex != 100 {
+        if randomNumberLabel.text != "100" {
             foutFunc()
             
             oneHunderedButton.setTitle("", forState: .Normal)
             
             calculatePercentage()
-        } else if randomIndex == 100 {
+        } else if randomNumberLabel.text == "100" {
             goedFunc()
             
             oneHunderedButton.setTitle("100", forState: .Normal)
             oneHunderedButton.enabled = false
+            if let i = find(numberArray,100) {
+                numberArray.removeAtIndex(i)
+                
+            }
+            randomNumberFunc()
         }
         updateMainView()
         calculatePercentage()
+        checkDone()
     }
     
     
@@ -858,10 +2556,9 @@ class ViewController: UIViewController {
     }
     
     func randomNumberFunc() {
-//        let numberArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 14, 15, 16, 18, 20, 21, 24, 25, 27, 28, 30, 32, 35, 36, 40, 42, 45, 48, 49, 54, 56, 60, 63, 63, 70, 72, 80, 81, 90, 100]
-//        let randomNumber = Int(arc4random_uniform(UInt32(numberArray.count)))
-//        var randomNumber = 20
-//        self.randomNumberLabel.text = String(randomNumber)
+        var randomIndex = Int(arc4random_uniform(UInt32(numberArray.count)))
+        self.randomNumberLabel.text = String(numberArray[randomIndex])
+        
     }
     
     func reset() {
@@ -906,9 +2603,20 @@ class ViewController: UIViewController {
                 sound.prepareToPlay()
                 sound.play()
             }
+            
+            
+        var randomIndex = Int(arc4random_uniform(UInt32(numberArray.count)))
+        self.randomNumberLabel.text = String(numberArray[randomIndex])
+
         }
-        self.randomNumberLabel.text = String(randomIndex)
+        //self.randomNumberLabel.text = String(randomIndex)
         calculatePercentage()
+    }
+    
+    func checkDone() {
+        if numberArray.isEmpty == true {
+            showAlertWithText()
+        }
     }
     
     func updateMainView() {
@@ -918,6 +2626,8 @@ class ViewController: UIViewController {
         self.scoreLabel.text = "Score: \(score)"
         self.goedLabel.text = "Goed: \(prntGoed)"
         self.foutLabel.text = "Fout: \(prntFout)"
+        
+        println("Numbers in array:\(numberArray.count)")
     }
     
     func calculatePercentage() {

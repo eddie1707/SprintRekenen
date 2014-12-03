@@ -220,18 +220,6 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.71612738779999996" green="0.85481869109999997" blue="0.91984296089999995" alpha="0.73999999999999999" colorSpace="calibratedRGB"/>
                             </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="52P-Ba-sar" userLabel="numberView">
-                                <rect key="frame" x="644" y="248" width="320" height="320"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M0z-MJ-D9v">
-                                        <rect key="frame" x="35" y="35" width="250" height="250"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="33"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" red="0.71612738779999996" green="0.85481869109999997" blue="0.91984296089999995" alpha="0.73999999999999999" colorSpace="calibratedRGB"/>
-                            </view>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WYT-O9-jrn">
                                 <rect key="frame" x="742" y="85" width="125" height="70"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -1456,6 +1444,18 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="52P-Ba-sar" userLabel="numberView">
+                                <rect key="frame" x="664" y="275" width="280" height="280"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M0z-MJ-D9v">
+                                        <rect key="frame" x="15" y="15" width="250" height="250"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="55"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.71612738779999996" green="0.85481869109999997" blue="0.91984296089999995" alpha="0.73999999999999999" colorSpace="calibratedRGB"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.98937216168887188" blue="0.95226817190235524" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
