@@ -13,25 +13,25 @@
     {
       "size" : "40x40",
       "idiom" : "ipad",
-      "filename" : "A4M-40.png",
+      "filename" : "SprintMan-40.png",
       "scale" : "1x"
     },
     {
       "size" : "40x40",
       "idiom" : "ipad",
-      "filename" : "A4M-80.png",
+      "filename" : "SprintMan-80.png",
       "scale" : "2x"
     },
     {
       "size" : "76x76",
       "idiom" : "ipad",
-      "filename" : "A4M-76.png",
+      "filename" : "SprintMan-76.png",
       "scale" : "1x"
     },
     {
       "size" : "76x76",
       "idiom" : "ipad",
-      "filename" : "A4M-152.png",
+      "filename" : "SprintMan-152.png",
       "scale" : "2x"
     }
   ],

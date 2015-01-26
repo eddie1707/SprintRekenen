@@ -11,7 +11,6 @@ import AVFoundation
 
 class ViewController: UIViewController {
     
-
     //MARK: IBOutlets
     
     //Labels
@@ -21,7 +20,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var goedLabel: UILabel!
     @IBOutlet weak var foutLabel: UILabel!
     @IBOutlet weak var tijdLabel: UILabel!
+    @IBOutlet weak var minuteLabel: UILabel!
     @IBOutlet weak var randomNumberLabel: UILabel!
+    @IBOutlet weak var secondRandomNumberLabel: UILabel!
     
     //Buttons
     
@@ -153,6 +154,7 @@ class ViewController: UIViewController {
     
     var timer = NSTimer()
     var counter = 0
+    var minuteCounter = 0
     
     var score = 100
     var goed:Double = 0
@@ -162,10 +164,6 @@ class ViewController: UIViewController {
     
     var numberArray = [1, 2, 2, 3, 3, 4, 4, 4, 5, 5, 6, 6, 6, 6, 7, 7, 8, 8, 8, 8, 9, 9, 9, 10, 10, 10, 10, 12, 12, 12, 12, 14, 14, 15, 15, 16, 16, 16, 18, 18, 18, 18, 20, 20, 20, 20, 21, 21, 24, 24, 24, 24, 25, 27, 27, 28, 28, 30, 30, 30, 30, 32, 32, 35, 35, 36, 36, 36, 40, 40, 40, 40, 42, 42, 45, 45, 48, 48, 49, 50, 50, 54, 54, 56, 56, 60, 60, 63, 63, 64, 70, 70, 72, 72, 80, 80, 81, 90, 90, 100]
     
-    // Index 41, nummer 18 ??
-    // Index 71, nummer 40 ??
-    
-    
     var audioPlayer: AVAudioPlayer?
     
     //MARK: Override functions
@@ -174,25 +172,42 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        println("numbers in numberArray: \(numberArray.count)")
-        
         self.tijdLabel.text = String(counter)
         
         var prntGoed = Int(goed)
         var prntFout = Int(fout)
         
         self.scoreLabel.text = "Score: \(score)"
-        self.goedLabel.text = "Goed: \(prntGoed)"
-        self.foutLabel.text = "Fout: \(prntFout)"
+        self.goedLabel.text = "Right: \(prntGoed)"
+        self.foutLabel.text = "Wrong: \(prntFout)"
         self.percentGLabel.text = "0%"
+        self.randomNumberLabel.text = "0"
+        self.secondRandomNumberLabel.text = ""
+        
         
         disableButtons()
         clearButtonText()
+        
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if (segue.identifier == "doneSegue") {
+            var doneVC: DoneViewController = segue.destinationViewController as DoneViewController
+            
+            doneVC.doneScore = score
+            doneVC.donePercent = percentGLabel.text
+            doneVC.doneGoed = goed
+            doneVC.doneFout = fout
+            doneVC.doneMinutes = minuteCounter
+            doneVC.doneSeconds = counter
+            
+            doneVC.mainVC = self
+        }
     }
     
     //MARK: IBActions
@@ -208,10 +223,6 @@ class ViewController: UIViewController {
             startButton.setTitle("Reset", forState: .Normal)
             startButton.backgroundColor = UIColor.redColor()
             timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("updateCounter"), userInfo: nil, repeats: true)
-            
-            var randomIndex = Int(arc4random_uniform(UInt32(numberArray.count)))
-            self.randomNumberLabel.text = String(numberArray[randomIndex])
-            
             randomNumberFunc()
             enableButtons()
         }
@@ -253,7 +264,7 @@ class ViewController: UIViewController {
             goedFunc()
             
             twoButton.setTitle("2", forState: .Normal)
-            twoRowTwoButton.enabled = false
+            twoButton.enabled = false
             if let i = find(numberArray,2) {
                 numberArray.removeAtIndex(i)
                 
@@ -2552,25 +2563,40 @@ class ViewController: UIViewController {
     //MARK: Helper functions
     
     func updateCounter() {
-        self.tijdLabel.text = String(++counter)
+        if counter == 59 {
+            counter = -1
+            self.minuteLabel.text = "\(++minuteCounter) :"
+        }
+
+        self.tijdLabel.text = "\(++counter)"
     }
     
     func randomNumberFunc() {
-        var randomIndex = Int(arc4random_uniform(UInt32(numberArray.count)))
-        self.randomNumberLabel.text = String(numberArray[randomIndex])
-        
+        if numberArray.isEmpty {
+            checkDone()
+        }
+        else {
+            var randomIndex = Int(arc4random_uniform(UInt32(numberArray.count)))
+            self.randomNumberLabel.text = String(numberArray[randomIndex])
+            self.secondRandomNumberLabel.text = String(numberArray[randomIndex])
+        }
     }
     
     func reset() {
         timer.invalidate()
         counter = 0
+        minuteCounter = 0
         score = 100
         goed = 0
         fout = 0
         percent = 0
-        self.tijdLabel.text = String(counter)
+        self.tijdLabel.text = "\(counter)"
+        self.minuteLabel.text = "\(minuteCounter) :"
         self.randomNumberLabel.text = "0"
+        self.secondRandomNumberLabel.text = ""
         self.percentGLabel.text = "\(percent)%"
+        
+        resetArray()
         
         updateMainView()
         clearButtonText()
@@ -2581,7 +2607,7 @@ class ViewController: UIViewController {
         self.fout += 1
         self.score -= 10
         
-        if let path = NSBundle.mainBundle().pathForResource("FOUT", ofType: "mp3") {
+        if let path = NSBundle.mainBundle().pathForResource("fout-geluid2", ofType: "mp3") {
             audioPlayer = AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath: path), fileTypeHint: "mp3", error: nil)
             
             if let sound = audioPlayer {
@@ -2607,15 +2633,16 @@ class ViewController: UIViewController {
             
         var randomIndex = Int(arc4random_uniform(UInt32(numberArray.count)))
         self.randomNumberLabel.text = String(numberArray[randomIndex])
+        self.secondRandomNumberLabel.text = String(numberArray[randomIndex])
+
 
         }
-        //self.randomNumberLabel.text = String(randomIndex)
         calculatePercentage()
     }
     
     func checkDone() {
-        if numberArray.isEmpty == true {
-            showAlertWithText()
+        if numberArray.isEmpty {
+            self.performSegueWithIdentifier("doneSegue", sender: self)
         }
     }
     
@@ -2624,9 +2651,9 @@ class ViewController: UIViewController {
         var prntFout = Int(fout)
         
         self.scoreLabel.text = "Score: \(score)"
-        self.goedLabel.text = "Goed: \(prntGoed)"
-        self.foutLabel.text = "Fout: \(prntFout)"
-        
+        self.goedLabel.text = "Right: \(prntGoed)"
+        self.foutLabel.text = "Wrong: \(prntFout)"
+                
         println("Numbers in array:\(numberArray.count)")
     }
     
@@ -2638,22 +2665,6 @@ class ViewController: UIViewController {
         
         self.percentGLabel.text = "\(endPercent)%"
     }
-    
-    func showAlertWithText() {
-        var prntGoed = Int(goed)
-        var prntFout = Int(fout)
-        var alert = UIAlertController(title: "Klaar!", message: "Je bent klaar! Om opnieuw te beginnen moet je resetten. Score: \(score), \(prntGoed) goed, \(prntFout) fout.", preferredStyle: UIAlertControllerStyle.Alert)
-        
-        let resetAction = UIAlertAction(title: "Reset", style: .Destructive) { (action) in
-            self.startButton.setTitle("Start", forState: .Normal)
-            self.startButton.backgroundColor = UIColor.blueColor()
-            self.reset()
-        }
-        alert.addAction(resetAction)
-        
-        self.presentViewController(alert, animated: true, completion: nil)
-    }
-    
     
     func enableButtons() {
         //Row 1
@@ -2676,7 +2687,8 @@ class ViewController: UIViewController {
         tenRowTwoButton.enabled = true
         twelveRowTwoButton.enabled = true
         fourteenRowTwoButton.enabled = true
-        eightRowTwoButton.enabled = true
+        sixteenRowTwoButton.enabled = true
+        eighteenRowTwoButton.enabled = true
         twentyRowTwoButton.enabled = true
 
         //Row 3
@@ -3023,6 +3035,114 @@ class ViewController: UIViewController {
         oneHunderedButton.setTitle("", forState: .Normal)
 
         
+    }
+    
+    func resetArray() {
+        
+        numberArray.removeAll(keepCapacity: false)
+        
+        numberArray.append(1)
+        numberArray.append(2)
+        numberArray.append(2)
+        numberArray.append(3)
+        numberArray.append(3)
+        numberArray.append(4)
+        numberArray.append(4)
+        numberArray.append(4)
+        numberArray.append(5)
+        numberArray.append(5)
+        numberArray.append(6)
+        numberArray.append(6)
+        numberArray.append(6)
+        numberArray.append(6)
+        numberArray.append(7)
+        numberArray.append(7)
+        numberArray.append(8)
+        numberArray.append(8)
+        numberArray.append(8)
+        numberArray.append(8)
+        numberArray.append(9)
+        numberArray.append(9)
+        numberArray.append(9)
+        numberArray.append(10)
+        numberArray.append(10)
+        numberArray.append(10)
+        numberArray.append(10)
+        numberArray.append(12)
+        numberArray.append(12)
+        numberArray.append(12)
+        numberArray.append(12)
+        numberArray.append(14)
+        numberArray.append(14)
+        numberArray.append(15)
+        numberArray.append(15)
+        numberArray.append(16)
+        numberArray.append(16)
+        numberArray.append(16)
+        numberArray.append(18)
+        numberArray.append(18)
+        numberArray.append(18)
+        numberArray.append(18)
+        numberArray.append(20)
+        numberArray.append(20)
+        numberArray.append(20)
+        numberArray.append(20)
+        numberArray.append(21)
+        numberArray.append(21)
+        numberArray.append(24)
+        numberArray.append(24)
+        numberArray.append(24)
+        numberArray.append(24)
+        numberArray.append(25)
+        numberArray.append(27)
+        numberArray.append(27)
+        numberArray.append(28)
+        numberArray.append(28)
+        numberArray.append(30)
+        numberArray.append(30)
+        numberArray.append(30)
+        numberArray.append(30)
+        numberArray.append(32)
+        numberArray.append(32)
+        numberArray.append(35)
+        numberArray.append(35)
+        numberArray.append(36)
+        numberArray.append(36)
+        numberArray.append(36)
+        numberArray.append(40)
+        numberArray.append(40)
+        numberArray.append(40)
+        numberArray.append(40)
+        numberArray.append(42)
+        numberArray.append(42)
+        numberArray.append(45)
+        numberArray.append(45)
+        numberArray.append(48)
+        numberArray.append(48)
+        numberArray.append(49)
+        numberArray.append(50)
+        numberArray.append(50)
+        numberArray.append(54)
+        numberArray.append(54)
+        numberArray.append(56)
+        numberArray.append(56)
+        numberArray.append(60)
+        numberArray.append(60)
+        numberArray.append(63)
+        numberArray.append(63)
+        numberArray.append(64)
+        numberArray.append(70)
+        numberArray.append(70)
+        numberArray.append(72)
+        numberArray.append(72)
+        numberArray.append(80)
+        numberArray.append(80)
+        numberArray.append(81)
+        numberArray.append(90)
+        numberArray.append(90)
+        numberArray.append(100)
+        
+        println("Numbers in array after reset:\(numberArray.count)")
     }
     
 }

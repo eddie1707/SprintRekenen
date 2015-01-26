@@ -7,14 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1E7242661A69489A004F6A06 /* fout-geluid2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1E7242651A69489A004F6A06 /* fout-geluid2.mp3 */; };
 		E8140F411A01133D005F4216 /* win.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E8140F401A01133D005F4216 /* win.mp3 */; };
 		E8140F431A011346005F4216 /* FOUT.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E8140F421A011346005F4216 /* FOUT.mp3 */; };
+		E8D3D4DE1A42EEE800C2E6AF /* FC-Sprint logo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E8D3D4DD1A42EEE800C2E6AF /* FC-Sprint logo.jpg */; };
 		E8E67C3E19FFD99800D2B73C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E67C3D19FFD99800D2B73C /* AppDelegate.swift */; };
 		E8E67C4019FFD99800D2B73C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E67C3F19FFD99800D2B73C /* ViewController.swift */; };
 		E8E67C4319FFD99800D2B73C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E8E67C4119FFD99800D2B73C /* Main.storyboard */; };
 		E8E67C4519FFD99800D2B73C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E8E67C4419FFD99800D2B73C /* Images.xcassets */; };
 		E8E67C4819FFD99800D2B73C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = E8E67C4619FFD99800D2B73C /* LaunchScreen.xib */; };
 		E8E67C5419FFD99800D2B73C /* SprintRekenenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E67C5319FFD99800D2B73C /* SprintRekenenTests.swift */; };
+		E8F43EB51A436FC500BA313C /* DoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F43EB41A436FC500BA313C /* DoneViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,8 +31,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1E7242651A69489A004F6A06 /* fout-geluid2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "fout-geluid2.mp3"; sourceTree = "<group>"; };
 		E8140F401A01133D005F4216 /* win.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = win.mp3; sourceTree = "<group>"; };
 		E8140F421A011346005F4216 /* FOUT.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = FOUT.mp3; sourceTree = "<group>"; };
+		E8D3D4DD1A42EEE800C2E6AF /* FC-Sprint logo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "FC-Sprint logo.jpg"; sourceTree = "<group>"; };
 		E8E67C3819FFD99800D2B73C /* SprintRekenen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SprintRekenen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8E67C3C19FFD99800D2B73C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E8E67C3D19FFD99800D2B73C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -40,6 +45,7 @@
 		E8E67C4D19FFD99800D2B73C /* SprintRekenenTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SprintRekenenTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8E67C5219FFD99800D2B73C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E8E67C5319FFD99800D2B73C /* SprintRekenenTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SprintRekenenTests.swift; sourceTree = "<group>"; };
+		E8F43EB41A436FC500BA313C /* DoneViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DoneViewController.swift; path = ../DoneViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +89,7 @@
 			children = (
 				E8E67C3D19FFD99800D2B73C /* AppDelegate.swift */,
 				E8E67C3F19FFD99800D2B73C /* ViewController.swift */,
+				E8F43EB41A436FC500BA313C /* DoneViewController.swift */,
 				E8E67C4119FFD99800D2B73C /* Main.storyboard */,
 				E8E67C4419FFD99800D2B73C /* Images.xcassets */,
 				E8E67C4619FFD99800D2B73C /* LaunchScreen.xib */,
@@ -94,6 +101,8 @@
 		E8E67C3B19FFD99800D2B73C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				1E7242651A69489A004F6A06 /* fout-geluid2.mp3 */,
+				E8D3D4DD1A42EEE800C2E6AF /* FC-Sprint logo.jpg */,
 				E8140F421A011346005F4216 /* FOUT.mp3 */,
 				E8140F401A01133D005F4216 /* win.mp3 */,
 				E8E67C3C19FFD99800D2B73C /* Info.plist */,
@@ -167,7 +176,7 @@
 				TargetAttributes = {
 					E8E67C3719FFD99800D2B73C = {
 						CreatedOnToolsVersion = 6.1;
-						DevelopmentTeam = 2CQ6BUPW5E;
+						DevelopmentTeam = BB8BKB98SA;
 					};
 					E8E67C4C19FFD99800D2B73C = {
 						CreatedOnToolsVersion = 6.1;
@@ -200,9 +209,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				E8E67C4319FFD99800D2B73C /* Main.storyboard in Resources */,
+				1E7242661A69489A004F6A06 /* fout-geluid2.mp3 in Resources */,
 				E8E67C4819FFD99800D2B73C /* LaunchScreen.xib in Resources */,
 				E8140F431A011346005F4216 /* FOUT.mp3 in Resources */,
 				E8E67C4519FFD99800D2B73C /* Images.xcassets in Resources */,
+				E8D3D4DE1A42EEE800C2E6AF /* FC-Sprint logo.jpg in Resources */,
 				E8140F411A01133D005F4216 /* win.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -222,6 +233,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E8E67C4019FFD99800D2B73C /* ViewController.swift in Sources */,
+				E8F43EB51A436FC500BA313C /* DoneViewController.swift in Sources */,
 				E8E67C3E19FFD99800D2B73C /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -348,9 +360,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = SprintRekenen/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -359,9 +373,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = SprintRekenen/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
