@@ -197,7 +197,7 @@ class ViewController: UIViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "doneSegue") {
-            var doneVC: DoneViewController = segue.destinationViewController as DoneViewController
+            var doneVC: DoneViewController = segue.destinationViewController as! DoneViewController
             
             doneVC.doneScore = score
             doneVC.donePercent = percentGLabel.text

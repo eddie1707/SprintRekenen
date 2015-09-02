@@ -18,7 +18,7 @@ class DoneViewController: UIViewController {
     var doneFout:Double!
     var doneMinutes:Int!
     var doneSeconds:Int!
-
+    
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var percentLabel: UILabel!
     @IBOutlet weak var goedLabel: UILabel!
@@ -28,7 +28,7 @@ class DoneViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         
         var fDoneGoed = Int(doneGoed)
@@ -42,7 +42,7 @@ class DoneViewController: UIViewController {
         self.secondsLabel.text = "\(doneSeconds)"
         
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -63,7 +63,7 @@ class DoneViewController: UIViewController {
         showAlertWithText()
     }
     
-
+    
     func reset() {
         mainVC.self.startButton.setTitle("Start", forState: .Normal)
         mainVC.self.startButton.backgroundColor = UIColor.blueColor()
@@ -74,10 +74,10 @@ class DoneViewController: UIViewController {
         mainVC.disableButtons()
     }
     
-        func showAlertWithText() {
-            var alert = UIAlertController(title: "Succes!", message: "A screenhot has been made and saved to your photo gallery", preferredStyle: UIAlertControllerStyle.Alert)
-            alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.Default, handler: nil))
-            self.presentViewController(alert, animated: true, completion: nil)
-        }
-
+    func showAlertWithText() {
+        var alert = UIAlertController(title: "Succes!", message: "A screenhot has been made and saved to your photo gallery", preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.Default, handler: nil))
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+    
 }
